@@ -244,6 +244,19 @@ exports.Twitter = (function(global) {
   };
   
   /*
+   * Remove an event listener
+   */
+  Twitter.prototype.removeEventListener = function(eventName, callback){
+  	this.listeners = this.listeners || {};
+  	this.listeners[eventName] = this.listeners[eventName] || [];
+  	
+  	for(var i = 0; i< this.listeners[eventName].length; i++){
+  		if(this.listeners[eventName][i] === callback)
+  			this.listeners[eventName].splice(i, 1);
+  	}
+  };
+  
+  /*
    * Fire an event
    */
   Twitter.prototype.fireEvent = function(eventName, data) {
